@@ -15,7 +15,11 @@ export function useMouseCoordinates() {
      set state with the clientX and clientY coordinates from the event
      👀 function handler(event) {}
     */
+ function handleMousemove({clientX, clientY}){
+      setCoordinates({clientX, clientY})
+    }
 
+    window.addEventListener('mousemove', handleMousemove)
     /* 
      ✅ attach an event listener to the window for the mousemove event
      📃 https://developer.mozilla.org/en-US/docs/Web/API/Element/mousemove_event
@@ -23,6 +27,7 @@ export function useMouseCoordinates() {
     */
 
     return function cleanup() {
+       window.removeEventListener('mousemove', handleMousemove)
       /* 
        ✅ make sure to clean up your event listeners when your hook is no longer in use!
        👀 window.removeEventListener("mousemove", handler)
